@@ -1,0 +1,24 @@
+Package: siegel.pnw.stream.temps
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Jane", "Doe",
+      email = "jane@example.com",
+      role = c("aut", "cre")
+    )
+  )
+Description: More about what it does (maybe more than one line).
+    Continuation lines should be indented.
+Depends:
+  R (>= 4.2)
+Imports:
+  archive (>= 1.1.12)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Author: Paul Frater
+Maintainer: Paul Frater <pnfrater@gmail.com>
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
