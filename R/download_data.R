@@ -33,7 +33,7 @@ download_huc_data <- function(hucs = NULL, comids = NULL, timeout = 300) {
   } else {
     hucs <- substr(hucs, 1, 6)
   }
-  if (!(hucs %in% pnw_hucs)) {
+  if (!any((hucs %in% pnw_hucs))) {
     stop(
       "You must supply a HUC6 that is found in pnw_hucs ",
       "or a COMID that is nested within such"

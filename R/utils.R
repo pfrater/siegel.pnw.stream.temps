@@ -34,12 +34,12 @@ comid_to_huc <- function(comids, huc.level = 6) {
 #' @rdname comid_to_huc
 #' @export
 huc_to_comids <- function(hucs) {
-  if (nchar(hucs) > 10) {
+  if (nchar(hucs) > 12) {
     warning (
       "Apologies. I can only go to HUC10 levels and will now trim ",
-      "your HUC to 10 digits"
+      "your HUC to 12 digits"
     )
-    hucs <- substr(hucs, 1, 10)
+    hucs <- substr(hucs, 1, 12)
   }
   out <-
     siegel.pnw.stream.temps::huc_comid_xref |>

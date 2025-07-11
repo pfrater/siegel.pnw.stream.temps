@@ -1,27 +1,36 @@
 
-devtools::load_all()
-
-load(here::here("data-raw/huc_comid_xref/nhd_data.RData"))
-
-sf::sf_use_s2(FALSE)
-
-# takes about 2-3 minutes
 huc_comid_xref <-
-  nhd_data |>
-  sf::st_make_valid() |>
-  dplyr::filter(comid == 22878865) |>
-  sf::st_transform(crs = 3071) |>
-  sf::st_join(sf::st_make_valid(huc10) |> sf::st_transform(crs = 3071)) |>
-  sf::st_drop_geometry() |>
-  dplyr::mutate(huc6 = substr(huc10, 1, 6)) |>
-  dplyr::filter(huc6 %in% pnw_hucs) |>
-  dplyr::select(huc10, comid) |>
-  dplyr::rename(huc = huc10)
+  readr::read_csv("data-raw/huc_comid_xref/COMID_to_HUC12.csv") |>
+  dplyr::rename(comid = COMID, huc = Huc12)
 
 usethis::use_data(
   huc_comid_xref,
   overwrite = TRUE
 )
+
+# devtools::load_all()
+#
+# load(here::here("data-raw/huc_comid_xref/nhd_data.RData"))
+#
+# sf::sf_use_s2(FALSE)
+#
+# # takes about 2-3 minutes
+# huc_comid_xref <-
+#   nhd_data |>
+#   sf::st_make_valid() |>
+#   dplyr::filter(comid == 22878865) |>
+#   sf::st_transform(crs = 3071) |>
+#   sf::st_join(sf::st_make_valid(huc10) |> sf::st_transform(crs = 3071)) |>
+#   sf::st_drop_geometry() |>
+#   dplyr::mutate(huc6 = substr(huc10, 1, 6)) |>
+#   dplyr::filter(huc6 %in% pnw_hucs) |>
+#   dplyr::select(huc10, comid) |>
+#   dplyr::rename(huc = huc10)
+#
+# usethis::use_data(
+#   huc_comid_xref,
+#   overwrite = TRUE
+# )
 
 
 # original way of doing it, but downloading all stream temp hucs took

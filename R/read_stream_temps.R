@@ -48,7 +48,6 @@ read_stream_temps <- function(
         get_pkg_huc_dir(x),
         "/st_pred_", y, ".csv"
       )
-      browser()
       callback_fun <-
         if (!is.null(comid) & !is.null(start.date) & !is.null(end.date)) {
           \(x, pos) {dplyr::filter(x, COMID %in% comid, tim.date %in% date_seq)}
@@ -85,6 +84,10 @@ read_stream_temps <- function(
       return(x_y_data)
     }) |> do.call(what = "rbind")
   }) |> do.call(what = "rbind")
-  out <- dplyr::rename(out, date = "tim.date")
+  if (!is.null(out)) {
+    out <- dplyr::rename(out, date = "tim.date")
+  } else {
+    warning("No data found. Returning NULL.")
+  }
   return(out)
 }

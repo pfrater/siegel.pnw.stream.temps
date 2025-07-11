@@ -2,4 +2,5 @@
 *.RData
 *.7z
 *.csv
+.Rhistory
 
